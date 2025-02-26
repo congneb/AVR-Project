@@ -1,0 +1,30 @@
+name: Run QEMU Example
+
+on: [push, pull_request]
+
+jobs:
+  qemu-job:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v3
+      with:
+        platforms: arm64,riscv64,arm
+
+    - name: Run QEMU
+      run: |
+        echo "Running QEMU..."
+        # Add your QEMU commands here
+        qemu-system-x86_64 --version
+
+    - name: Test QEMU
+      run: |
+        git clone https://github.com/RahulRNandan/LED_Blink_AVR.git
+        cd LED_Blink_AVR
+
+        qemu-system-avr -M arduino-uno -bios build/main.hex -serial stdio
+
+        
+      
