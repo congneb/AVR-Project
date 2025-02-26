@@ -26,7 +26,7 @@ jobs:
         git clone https://github.com/RahulRNandan/LED_Blink_AVR.git
         cd LED_Blink_AVR
 
-        qemu-system-avr -nographic -M arduino-uno -bios build/main.hex -serial stdio
+        qemu-system-avr -nographic -M arduino-uno -bios build/main.hex
 
         
       
