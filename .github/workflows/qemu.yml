@@ -10,7 +10,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Install QEMU
-      run: sudo apt-get update && sudo apt-get install -y qemu-system-x86
+      run: sudo apt-get update && sudo apt-get install -y qemu-system-avr
 
     - name: Install QEMU static binaries
       run: |
@@ -19,7 +19,7 @@ jobs:
     - name: Run QEMU
       run: |
         echo "Running QEMU..."
-        qemu-system-x86_64 --version
+        qemu-system-avr --version
 
     - name: Test QEMU
       run: |
