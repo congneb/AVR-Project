@@ -3,20 +3,22 @@ name: Run QEMU Example
 on: [push, pull_request]
 
 jobs:
-  qemu-job:
+  run-qemu:
     runs-on: ubuntu-latest
-
     steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-    - name: Set up QEMU
-      uses: docker/setup-qemu-action@v3
-      with:
-        platforms: all
+    - name: Install QEMU
+      run: sudo apt-get update && sudo apt-get install -y qemu-system-x86
+
+    - name: Install QEMU static binaries
+      run: |
+        docker run --rm --privileged docker.io/tonistiigi/binfmt:latest --install arm64,riscv64,arm
 
     - name: Run QEMU
       run: |
         echo "Running QEMU..."
-        # Add your QEMU commands here
         qemu-system-x86_64 --version
 
     - name: Test QEMU
